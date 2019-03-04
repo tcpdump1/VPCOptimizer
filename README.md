@@ -1,6 +1,6 @@
 # VPCOptimizer
 
-SUMMARY
+SUMMARY:
 
 The function of this template is to inform the account holder about the following: 
 
@@ -14,7 +14,7 @@ The first function sends notification when 70% of the available IP address space
 
 
 
-HOW TO USE
+HOW TO USE:
 
 1) Very simple, launch the template and fill in the desired stack name and email address you wish to receive notifications on.
                                    
