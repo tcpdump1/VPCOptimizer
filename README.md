@@ -1,6 +1,7 @@
 # VPCOptimizer
 
 SUMMARY
+
 The function of this template is to inform the account holder about the following: 
 
 - 70% of IP address in a VPC or subnet is used up so the user can plan accordingly.
