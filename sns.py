@@ -5,9 +5,9 @@ sns = boto3.client('sns')
 create_sns = sns.create_topic(Name='testSNS')
 
 subscribe = sns.subscribe(
-    TopicArn='arn:aws:sns:eu-west-1:391149699095:testSNS',
+    TopicArn='',
     Protocol='Email',
-    Endpoint='oruntac@amazon.com')
+    Endpoint='')
 
 #response = client.confirm_subscription(
 #    Topic-Arn='string',
