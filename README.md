@@ -1,10 +1,12 @@
 # VPCOptimizer
 
-SUMMARY:
+SUMMARY
 
-The function of this template is to inform the account holder about the following: 
+PROBLEM: When using a VPC, resources can run out of available IP ranges. For example, Loadbalancers in a VPC can scale because of traffic and if you dont have enough IP addresses in a subnet or VPC to accomodate new loadbalancer nodes, this can cause production pain.
 
-- 70% of IP address in a VPC or subnet is used up so the user can plan accordingly.
+SOLUTION: The function of this template is to inform the account holder about the following: 
+
+- When 70% of IP address in a VPC or subnet is used up so the user can plan accordingly to scale.
 - There are unused Elastic IP address in an account (save some cost for AWS users).
 - Blackhole routes in a route table (save some time troubleshooting basic issues).
 
@@ -12,6 +14,9 @@ The Cloudformation template consist of SNS, Lambda and Cloudwatch event. The tem
 
 The first function sends notification when 70% of the available IP address space in the VPC is used up. The second function sends notification when the account holder has unused Elastic IP addresses, when routes are black-holed in any subnet of the VPC and finally, when 70% of the available IP address space in any subnet is used up.
 
+PYTHON LIBRARIES/MODULES USED:
+
+1) Boto3
 
 
 HOW TO USE:
@@ -22,9 +27,9 @@ HOW TO USE:
 
 3) Both Lambda functions are triggered by Cloudwatch events scheduled to run every hour, so you need to be patient :)
 
-4) The first function (VPCSetupOptimizer1) checks each VPC in that region and performs a calculation to determine if 70% of the available address space is exhausted. If there is, an email notification is sent to inform the user to add more CIDR blocks. Please note that available address space does not include the five reserved IP addresses in each subnet, as this is already excluded from assignment in the code.
+4) The first function (VPCSetupOptimizer1) checks each VPC in that region and performs a calculation to determine if 70% of the available address space is exhausted. If there is, an email notification is sent to inform the user to add more CIDR blocks. Please note that available address space does not include five reserved IP addresses in each subnet, as this is already excluded from assignment in the code.
 
-5) Lets talk a bit about the second Lambda function. It is common knowledge that customers pay for Elastic IP addresses that are not assigned to any network interface. To help our customers save cost, the second function (VPCSetupOptimizer2) sends notifications via email when there is an Elastic IP address that is not associated with any network interface. Another common setup error is when a route points to a non-working target (NAT Gateway, NAT Instance, etc).
+5) Lets talk a bit about the second Lambda function. AWS users pay for Elastic IP addresses that are not assigned to any network interface. To help save cost, the second function (VPCSetupOptimizer2) sends notifications via email when there is an Elastic IP address that is not associated with any network interface. Another common setup error is when a route points to a non-working target (NAT Gateway, NAT Instance, etc).
 
 6) To fix this, whenever the second function is triggered, if it discovers that a route is pointing to an invalid target, it will send a notification to the user stating the particular route and route table. Lastly, the second function also checks all subnets in the VPC for available IP space, very similar to the first function, only in this case, it is done per subnet.
 

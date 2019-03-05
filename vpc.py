@@ -1,12 +1,10 @@
-#https://docs.aws.amazon.com/lambda/latest/dg/nodejs-create-deployment-pkg.html
-#https://blog.shikisoft.com/provisioning-custom-cloudformation-resource-using-aws-lambda/
 def region(x):
 
     import json
     import boto3
 
     sns = boto3.client('sns')
-    topicArn = 'arn:aws:sns:eu-west-1:391149699095:testSNS'
+    topicArn = 'arn:aws:sns:eu-west-1:AccountNumber:testSNS' # Fill in the ARN for the topic
     vpc_client = boto3.client('ec2', region_name = x)
 
 ##CODE FOR CHECKING IP ADDRESS USAGE IN VPCS
